@@ -1,28 +1,36 @@
 const assert = require('assert');
-const calculateNumber = require('./0-calcul.js');
+const calculateNumber = require('./0-calcul');
 
 describe('calculateNumber', () => {
-  it('not rounded', () => {
-    assert.strictEqual(calculateNumber(1, 1), 2);
-    assert.strictEqual(calculateNumber(1, 3), 4);
+  it('floating point whole numbers', () => {
+    assert.strictEqual(calculateNumber(1.0, 2.0), 3);
   });
 
-  it('has decimal point >= 0.5 ', () => {
-    assert.strictEqual(calculateNumber(1.5, 1), 3);
-    assert.strictEqual(calculateNumber(1, 2.6), 4);
-    assert.strictEqual(calculateNumber(1.5, 2.6), 5);
-    assert.strictEqual(calculateNumber(1.4, 2.6), 4);
+  it('rounding down b\'s floating point fractional number', () => {
+    assert.strictEqual(calculateNumber(1.0, 2.4), 3);
   });
 
-  it('one arg has decimal point >= 0.5 ', () => {
-    assert.strictEqual(calculateNumber(1.4, 1), 2);
-    assert.strictEqual(calculateNumber(1, 2.1), 3);
-    assert.strictEqual(calculateNumber(1.4, 1.4), 2);
+  it('rounding down a and b\'s floating point fractional number', () => {
+    assert.strictEqual(calculateNumber(1.4, 2.4), 3);
   });
 
-  it('should return NaN', () => {
-    assert.strictEqual(calculateNumber(), NaN);
-    assert.strictEqual(calculateNumber(1, 'e'), NaN);
-    assert.strictEqual(calculateNumber('e', 'e'), NaN);
+  it('rounding down a\'s floating point fractional number', () => {
+    assert.strictEqual(calculateNumber(1.4, 2.0), 3);
+  });
+
+  it('rounding up b\'s floating point fractional numbers', () => {
+    assert.strictEqual(calculateNumber(1.0, 2.5), 4);
+  });
+
+  it('rounding up a and b\'s floating point fractional numbers', () => {
+    assert.strictEqual(calculateNumber(2.6, 2.5), 6);
+  });
+
+  it('rounding up a\'s floating point fractional numbers', () => {
+    assert.strictEqual(calculateNumber(2.6, 2.0), 5);
+  });
+
+  it('rounding down a and b floating point fractional numbers with trailing 9\'s', () => {
+    assert.strictEqual(calculateNumber(2.499999, 3.499999), 5);
   });
 });
