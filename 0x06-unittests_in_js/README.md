@@ -1,1 +1,5 @@
-# 0x06-unittests_in_js
+# Unittests in JS
+
+This project contains tasks for learning to create unittests in NodeJS.
+
+
